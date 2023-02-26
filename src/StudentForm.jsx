@@ -24,11 +24,11 @@ export function StudentForm({getUser}) {
         name="username"
         value={username}
       />
-      <button onClick={() => addUser(name, username)}>Add Student</button>
+      <button onClick={() => addUser(name, username, getUser)}>Add Student</button>
     </div>
   );
 }
-async function addUser(name, username) {
+async function addUser(name, username,getUser) {
   const newMovie = {
     name: name,
     username: username,
@@ -39,5 +39,7 @@ async function addUser(name, username) {
     body: JSON.stringify(newMovie),
     headers: { "Content-Type": "application/json" },
     
-  })
+  }).then(()=>{
+    return getUser();
+})
 }
